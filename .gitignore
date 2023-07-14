@@ -105,4 +105,5 @@ dmypy.json
 .pytype/
 cython_debug/
 .idea
+apps/video_edit/media
 
