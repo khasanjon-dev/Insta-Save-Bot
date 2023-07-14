@@ -8,9 +8,9 @@ packages = [{include = "insta_save_bot"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-python-dotenv = "^1.0.0"
 aiogram = "^2.25.1"
 instaloader = "^4.10"
+environs = "^9.5.0"
 
 
 [build-system]
