@@ -11,6 +11,9 @@ python = "^3.10"
 aiogram = "^2.25.1"
 instaloader = "^4.10"
 environs = "^9.5.0"
+sqlalchemy = "^2.0.18"
+alembic = "^1.11.1"
+psycopg2-binary = "^2.9.6"
 
 
 [build-system]
