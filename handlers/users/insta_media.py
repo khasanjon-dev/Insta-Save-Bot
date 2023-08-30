@@ -27,10 +27,10 @@ async def send_media(message: types.Message):
         if i == 0:
             if post.is_video:
                 video_url = post.video_url
-                await message.answer_video(video_url, caption=BOT_USERNAME)
+                await message.answer_video(types.InputFile.from_url(video_url), caption=BOT_USERNAME)
             else:
                 photo_url = post.url
-                await message.answer_photo(photo_url, caption=BOT_USERNAME)
+                await message.answer_photo(types.InputFile.from_url(photo_url), caption=BOT_USERNAME)
     else:
         await message.reply('Invalid Instagram URL')
 

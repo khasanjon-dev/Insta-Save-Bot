@@ -6,8 +6,5 @@ from loader import dp
 
 @dp.message_handler(CommandHelp())
 async def bot_help(message: types.Message):
-    text = ("Buyruqlar: ",
-            "/start - Botni ishga tushirish",
-            "/help - Yordam")
-
-    await message.answer("\n".join(text))
+    text = "Just send instagram link 🫠 !"
+    await message.answer(text)
