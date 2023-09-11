@@ -14,6 +14,7 @@ environs = "^9.5.0"
 sqlalchemy = "^2.0.18"
 alembic = "^1.11.1"
 psycopg2-binary = "^2.9.6"
+asyncpg = "^0.28.0"
 
 
 [build-system]

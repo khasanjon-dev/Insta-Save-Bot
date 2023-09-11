@@ -1,23 +1,38 @@
-from sqlalchemy.orm import Session
+from sqlalchemy import select, update, func
 
-from utils.db_api.db.session import get_db
+from utils.db_api.db.session import get_session
 from utils.db_api.models import Users
 
 
 class DataBase:
     @staticmethod
-    def create_or_update(data: dict):
-        session: Session = next(get_db())
-        user = session.query(Users).filter_by(telegram_id=data['telegram_id']).count()
-        if user:
-            session.query(Users).filter(Users.telegram_id == data['telegram_id']). \
-                update(data, synchronize_session=False)
-        else:
-            user = Users(**data)
-            session.add(user)
+    async def create_or_update(data: dict):
+        async with get_session() as session:
+            telegram_id = data['telegram_id']
+            query = select(Users).where(Users.telegram_id == telegram_id)
+            user = await session.scalar(query)
+            if user:
+                query = update(Users).where(Users.telegram_id == telegram_id).values(data)
+                await session.execute(query)
+            else:
+                user = Users(**data)
+                session.add(user)
+            return user
 
-        session.commit()
-        session.close()
+    @staticmethod
+    async def count_users():
+        async with get_session() as session:
+            query = select(func.count()).select_from(Users)
+            count = await session.scalar(query)
+            return count
+
+    @staticmethod
+    async def update_language(data: dict):
+        async with get_session() as session:
+            telegram_id = data['telegram_id']
+            query = update(Users).where(Users.telegram_id == telegram_id).values(data).execution_options(
+                synchronize_session="fetch")
+            await session.execute(query)
 
 
 db = DataBase()

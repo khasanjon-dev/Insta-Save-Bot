@@ -13,3 +13,4 @@ class Users(Base):
     telegram_id: Mapped[int] = mapped_column(BigInteger, unique=True)
     updated_at: Mapped[datetime] = mapped_column(DateTime, onupdate=func.current_timestamp(), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+    language_code: Mapped[str] = mapped_column(String(2))
